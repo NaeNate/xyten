@@ -1,6 +1,6 @@
 import {
   ApplicationCommandOptionData,
-  ApplicationCommandPermissionData,
+  Client,
   CommandInteraction,
 } from "discord.js"
 
@@ -8,8 +8,10 @@ export type commandType = {
   name: string
   description: string
   options: ApplicationCommandOptionData[]
-  permissions: ApplicationCommandPermissionData[]
   execute: executeType
 }
 
-export type executeType = (interaction: CommandInteraction) => Promise<void>
+export type executeType = (
+  interaction: CommandInteraction,
+  client: Client
+) => Promise<void>
