@@ -18,6 +18,12 @@ const command: commandType = {
       required: true,
     },
     {
+      name: "message",
+      description: "The message you want sent",
+      type: "STRING",
+      required: true,
+    },
+    {
       name: "roles",
       description: "The roles you wan't chosen from",
       type: "STRING",
@@ -27,6 +33,7 @@ const command: commandType = {
 
   execute: async (interaction, client) => {
     const channel = interaction.options.getChannel("channel") as TextChannel
+    const message = interaction.options.getString("message")!.split("\\n")!
 
     const roles = interaction.options
       .getString("roles")!
@@ -54,9 +61,13 @@ const command: commandType = {
       ],
     })
 
-    interaction.reply("👍")
+    interaction.reply({
+      content: "👍",
+      ephemeral: true,
+    })
 
     channel.send({
+      content: message.join("\n"),
       components: [select],
     })
 
